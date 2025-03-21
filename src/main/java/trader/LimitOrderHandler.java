@@ -16,7 +16,8 @@ public class LimitOrderHandler extends Engine {
 
     public List<Trade> matchOrder(int quantity, double price, Side side) {
         List<Trade> trades = new ArrayList<>();
-        LimitOrder order = new LimitOrder(orderId++, quantity, price, side);
+        int currentOrderId = orderId++;
+        LimitOrder order = new LimitOrder(currentOrderId, quantity, price, side);
         trades = Engine.OPPOSITE_ORDER_BOOK(side).matchOrder(order);
         marketTradePersistence.addTrades(trades);
 
@@ -29,5 +30,11 @@ public class LimitOrderHandler extends Engine {
     public void cancelOrder(Side side, int orderId) {
         Engine.ORDER_BOOK(side).onCancelOrder(orderId);
     }
-
+    
+    /**
+     * 返回最后使用的订单ID，用于测试
+     */
+    public int getLastOrderId() {
+        return orderId - 1;
+    }
 }
