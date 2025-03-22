@@ -78,7 +78,7 @@ handler.cancelOrder(Side.SELL, orderId);
 
 ```bash
 javac -d target/test-classes -cp "target/classes:path/to/fastutil.jar" src/test/java/trader/LimitOrderHandlerTest.java
-java -cp "target/classes:target/test-classes:path/to/fastutil.jar" trader.LimitOrderHandlerTest
+java -cp "target/classes:target/test-classes:path/to/fastutil.jar" trader.OrderHandlerTest
 ```
 
 ## 性能优化
