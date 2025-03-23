@@ -1,6 +1,7 @@
 package core;
 
 import com.lmax.disruptor.BlockingWaitStrategy;
+import com.lmax.disruptor.BusySpinWaitStrategy;
 import com.lmax.disruptor.RingBuffer;
 import com.lmax.disruptor.dsl.Disruptor;
 import com.lmax.disruptor.dsl.ProducerType;
@@ -43,8 +44,8 @@ public class Engine {
                 new OrderMatchEventFactory(),
                 1024,
                 Executors.defaultThreadFactory(),
-                ProducerType.SINGLE,
-                new BlockingWaitStrategy()
+                ProducerType.MULTI,
+                new BusySpinWaitStrategy()
         );
         
         // 设置事件处理器
