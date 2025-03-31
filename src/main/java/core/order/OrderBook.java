@@ -27,6 +27,13 @@ public class OrderBook implements EngineConstants {
         initPriceLevels();
     }
 
+    public double getBestPrice() {
+        if (priceLevelIndexMap.isEmpty()) {
+            return 0;
+        }
+        return priceLevelIndexMap.firstDoubleKey();
+    }
+
     public List<Trade> matchOrder(Order order) {
         if(side.equals(order.getSide())) {
             return Collections.emptyList();

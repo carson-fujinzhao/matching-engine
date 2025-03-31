@@ -13,8 +13,11 @@ public class MarketOrderHandler extends Engine {
     int orderId = 0;
     TradePersistence marketTradePersistence = new TradePersistence();
 
-    public void matchOrder(int quantity, double price, Side side) {
+    public void matchOrder(int quantity, Side side) {
         List<Trade> trades = new ArrayList<>();
+        //价格优先
+        double price = Engine.OPPOSITE_ORDER_BOOK(side).getBestPrice();
+        //TODO:滑点控制
         MarketOrder order = new MarketOrder(orderId++, quantity, price, side, 0);
         Engine.OPPOSITE_ORDER_BOOK(side).matchOrder(order);
         marketTradePersistence.addTrades(trades);
